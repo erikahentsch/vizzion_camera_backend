@@ -79,8 +79,12 @@ function errorHandler(error, req,res,next) {
     });
 };
 
-// app.use(notFound);
-// app.use(errorHandler);
+app.use(notFound);
+app.use(errorHandler);
+//   All remaining requests return the React app, so it can handle routing.
+app.get('*', function(request, response) {
+    response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
+  })
 
 const port = process.env.PORT || 5000;
 
