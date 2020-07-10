@@ -44,6 +44,8 @@ app.get('/api', function (req, res) {
 });
 
 app.use('', express.static('public'));
+app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
+
 
 app.get("/static", (req, res)=> {
     res.send('/camera.png')
@@ -79,8 +81,8 @@ function errorHandler(error, req,res,next) {
     });
 };
 
-app.use(notFound);
-app.use(errorHandler);
+// app.use(notFound);
+// app.use(errorHandler);
 //   All remaining requests return the React app, so it can handle routing.
 app.get('*', function(request, response) {
     response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
